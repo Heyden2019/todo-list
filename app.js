@@ -2,6 +2,8 @@ import express from 'express';
 import routes from './routes/routes';
 import os from "os"
 import cors from "cors";
+const path = require('path');
+
 const bodyParser = require("body-parser");
 
 const app = express();
