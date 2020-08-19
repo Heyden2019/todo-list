@@ -9,6 +9,9 @@ const port = process.env.PORT || 9000;
 app.set('port', port);
 const db = require('./routes/queries')
 
+const staticDir = path.join(__dirname, 'frontend/build');
+app.use(express.static(staticDir));
+
 app.use(cors());
 
 app.use(bodyParser.json())
