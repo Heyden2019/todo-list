@@ -1,35 +1,26 @@
-import express from 'express';
-import routes from './routes/routes';
+import express from 'express'
+import routes from './routes/routes'
 import os from "os"
-import cors from "cors";
-const path = require('path');
+import cors from "cors"
+const path = require('path')
+const bodyParser = require("body-parser")
 
-const bodyParser = require("body-parser");
-
-const app = express();
-const port = process.env.PORT || 9000;
-app.set('port', port);
+const app = express()
+const port = process.env.PORT || 9000
+app.set('port', port)
 const db = require('./routes/queries')
 
-const staticDir = path.join(__dirname, 'frontend/build');
-app.use(express.static(staticDir));
+const staticDir = path.join(__dirname, 'frontend/build')
+app.use(express.static(staticDir))
 
-app.use(cors());
+app.use(cors())
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-routes(app, db);
-
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-//     res.header('Access-Control-Allow-Credentials', 'true');
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
+routes(app, db)
 
 app.listen(port, () => {
-  console.log('App server running at http://' + os.hostname() + ':' + port);
-});
+  console.log('App server running at http://' + os.hostname() + ':' + port)
+})
 

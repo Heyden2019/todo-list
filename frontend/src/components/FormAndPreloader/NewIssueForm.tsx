@@ -1,12 +1,14 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, {FC} from 'react';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { required, maxLengthCreator } from '../../utils/validators/validators';
 import TextField from '@atlaskit/textfield';
 import { ErrorMessage } from '@atlaskit/form';
+import {FormValuesType} from "./FormAndPreloader";
+import {WrappedFieldProps} from 'redux-form/lib/Field'
 
 const maxLength100 = maxLengthCreator(100);
 
-const renderField = ({
+const renderField: FC<WrappedFieldProps> = ({
         input,
         meta: { error, active, submitFailed, invalid }
     }) => (<>
@@ -23,10 +25,10 @@ const renderField = ({
         }
     </>)
 
-const NewIssueForm = (props) => {
+const NewIssueForm: FC<InjectedFormProps<FormValuesType>> = ({handleSubmit}) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <Field
                 name="issueTitle"
                 type="text"
@@ -37,6 +39,6 @@ const NewIssueForm = (props) => {
     )
 }
 
-export default reduxForm({
+export default reduxForm<FormValuesType>({
     form: 'newIssueForm'
 })(NewIssueForm)

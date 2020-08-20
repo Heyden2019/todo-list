@@ -1,12 +1,12 @@
 const { pool } = require('../DB_config')
 
 const getTodos = async () => {
-    const res = await pool.query('SELECT * FROM todos')
+    const res = await pool.query('SELECT * FROM todos ORDER BY id DESC')
     return res
 }
 
-const createTodo = async (title, issue_key) => {
-    await pool.query('INSERT INTO todos (title, iscomplete, issue_key) VALUES ($1, False, $2)', [title, issue_key])
+const createTodo = async (title) => {
+    await pool.query('INSERT INTO todos (title, iscomplete) VALUES ($1, False)', [title])
 }
 
 const updateTodo = async (id, iscomplete) => {
