@@ -1,30 +1,18 @@
-import issuePageReducer, {setIsFetching, setState, setJiraIssueKey} from "./issue-reducer";
+import issuePageReducer, {action as AC} from "./issue-reducer";
 
 let state = {
     issues: [
         {id: 1, title: 'Issues', iscomplete: false},
     ],
     totalIssues: 0,
-    isFetching: false,
-    jiraIssueKey: 'ZZZ'
+    isFetching: false
 };
 
 it('isFetching must be toggled', () => {
-    let action = setIsFetching(true);
-
+    let action = AC.setIsFetching(true);
     let newState = issuePageReducer(state, action);
 
     expect(newState.isFetching).toBe(true);
-
-});
-
-it('jiraIssueKey should be changed', () => {
-
-    let action = setJiraIssueKey('TA-1');
-
-    let newState = issuePageReducer(state, action);
-
-    expect(newState.jiraIssueKey).toBe('TA-1');
 
 });
 
@@ -45,8 +33,7 @@ it('new state must be add', () => {
         totalTodos: 2,
     }
 
-    let action = setState(newIssue);
-
+    let action = AC.setState(newIssue);
     let newState = issuePageReducer(state, action);
 
     expect(newState.issues).toBe(newIssue.todos);
